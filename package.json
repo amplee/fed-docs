@@ -14,6 +14,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.0.0-alpha.47",
+    "@vuepress/plugin-nprogress": "^1.0.0-alpha.47",
     "vuepress": "^1.0.0-alpha.47"
   }
 }
