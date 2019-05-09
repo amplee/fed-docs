@@ -1,5 +1,5 @@
 ---
-title: standard 风格指南
+title: 标准风格指南
 ---
 这是 JavaScript [standard](https://github.com/standard/standard) 代码规范的全文。
 

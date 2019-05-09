@@ -1,5 +1,5 @@
 ---
-title: Git Hook
+title: 提交前校验
 ---
 
 在基于项目中添加`ESLint`，帮助我们在开发阶段进行代码风格校验后，我们还需要在代码提交到仓库时，也进行提交前校验，以保证在远程仓库的代码是符合代码规范的。
@@ -11,7 +11,7 @@ title: Git Hook
 > [Git hook](https://www.git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90)<br />
 > Git 钩子： Git可以在特定的重要动作发生时触发自定义脚本。
 
-## pre-commit
+## pre-commit 钩子
 `pre-commit` 钩子在键入提交信息前运行。它用于检查即将提交的快照。如果该钩子以 __非零值__ 退出，Git 将放弃此次提交。
 
 ## 使用

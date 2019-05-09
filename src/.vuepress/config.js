@@ -10,7 +10,7 @@ module.exports = {
             {text: '私有npm', link: '/verdaccio/'},
         ],
         sidebar: {
-            '/style-guide/': getStyleGuide('代码风格指南')
+            '/style-guide/': getStyleGuide('代码规范', '代码审查')
         },
         displayAllHeaders: true,
         repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
@@ -30,19 +30,38 @@ module.exports = {
 };
 
 
-function getStyleGuide(groupA) {
+function getStyleGuide(groupA, groupB) {
     return [
         {
             title: groupA,
             collapsable: false,
             children: [
                 '',
-                'eslint-standard',
-                'lib-guide',
-                'editor',
-                'ESLint',
-                'git-hook',
-                'code-review'
+                {
+                    title: '风格指南',
+                    collapsable: false,
+                    children: [
+                        'eslint-standard',
+                        'lib-guide',
+                    ]
+                },
+                {
+                    title: '工具支持',
+                    collapsable: false,
+                    children: [
+                        'editor',
+                        'ESLint',
+                        'git-hook',
+                    ]
+                }
+            ]
+        },
+        {
+            title: groupB,
+            collapsable: false,
+            children: [
+                'code-review-1',
+                'code-review-2'
             ]
         }
     ]

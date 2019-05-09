@@ -1,6 +1,6 @@
 ---
 # sidebar: auto
-title: 编辑器配置
+title: 编辑器支持
 ---
 
 
