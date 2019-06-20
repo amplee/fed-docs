@@ -1,6 +1,7 @@
 module.exports = {
     port: 8302,
     dest: 'docs',
+    base: '/docs/',
     evergreen: false,
     title: 'WeHotel 前端文档',
     // permalink: '/:slug',

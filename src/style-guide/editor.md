@@ -57,6 +57,3 @@ __配置__
 
 统一的标准配置查看 [ESLint](/style-guide/ESLint#eslintrc)
 
-## Prettier
-
-待补充
