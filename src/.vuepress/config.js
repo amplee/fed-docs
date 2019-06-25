@@ -11,7 +11,8 @@ module.exports = {
             {text: '私有npm', link: '/verdaccio/'},
         ],
         sidebar: {
-            '/style-guide/': getStyleGuide('代码规范', '代码审查')
+            '/style-guide/': getStyleGuide('代码规范', '代码审查'),
+            '/verdaccio/': getVerdaccio('私有 NPM', 'NPM支持')
         },
         displayAllHeaders: true,
         repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
@@ -66,4 +67,23 @@ function getStyleGuide(groupA, groupB) {
             ]
         }
     ]
+}
+
+function getVerdaccio(groupA, groupB) {
+    return [{
+        title: groupA,
+        collapsable: false,
+        children: [
+            '',
+            'guide',
+            'publish',
+            'install'
+        ]
+    } ,{
+        title: groupB,
+        collapsable: false,
+        children: [
+            'nrm'
+        ]
+    }];
 }
