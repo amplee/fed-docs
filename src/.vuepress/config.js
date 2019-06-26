@@ -83,7 +83,8 @@ function getVerdaccio(groupA, groupB) {
         title: groupB,
         collapsable: false,
         children: [
-            'nrm'
+            'nrm',
+            // 'yrm'
         ]
     }];
 }
