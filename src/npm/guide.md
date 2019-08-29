@@ -9,7 +9,7 @@ title: 规范
 一个完整的 `package.json`， 应至少包含以下信息：
 ``` json
 {
-  "name": "@wehotel/verdaccio", // 包名
+  "name": "@bestwehotel/<package>", // 包名
   "version": "1.0.0", // 版本
   "description": "", // 包描述
   "main": "index.js", // 入口文件

@@ -8,11 +8,11 @@ module.exports = {
     themeConfig: {
         nav: [
             {text: '代码风格指南', link: '/style-guide/'},
-            {text: '私有npm', link: '/verdaccio/'},
+            {text: '私有npm', link: '/npm/'},
         ],
         sidebar: {
             '/style-guide/': getStyleGuide('代码规范', '代码审查'),
-            '/verdaccio/': getVerdaccio('私有 NPM', 'NPM支持')
+            '/npm/': getNpm('私有 NPM', 'NPM支持')
         },
         displayAllHeaders: true,
         repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
@@ -63,13 +63,14 @@ function getStyleGuide(groupA, groupB) {
             collapsable: false,
             children: [
                 'code-review-1',
-                'code-review-2'
+                'code-review-2',
+                'code-review-3'
             ]
         }
     ]
 }
 
-function getVerdaccio(groupA, groupB) {
+function getNpm(groupA, groupB) {
     return [{
         title: groupA,
         collapsable: false,

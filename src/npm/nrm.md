@@ -59,5 +59,5 @@ nrm test [name]
 ### 增加 wehotel 私有npm 源
 
 ``` sh
-nrm add wehotel http://10.237.149.220:4873
+nrm add wehotel http://cnpm.bestwehotel.net:7001
 ```

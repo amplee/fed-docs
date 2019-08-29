@@ -3,7 +3,9 @@ title: 指引
 home: false
 ---
 
-> 私有npm地址：[http://10.237.149.220:4873](http://10.237.149.220:4873)
+> 私有npm web地址：[http://cnpm.bestwehotel.net:7002/](http://cnpm.bestwehotel.net:7002/)
+>
+> 私有npm源地址：[http://cnpm.bestwehotel.net:7001/](http://cnpm.bestwehotel.net:7001/)
 
 ## 背景
 
@@ -20,5 +22,4 @@ home: false
 
 ## 技术选型
 
-目前市面主流的 私有npm仓库搭建有很多种，目前我们是选用了 `verdaccio` 搭建。
-> [Verdaccio](https://verdaccio.org)
+目前市面主流的 私有npm仓库搭建有很多种，目前我们是选用了 `cnpm` 搭建。

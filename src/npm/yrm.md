@@ -63,5 +63,5 @@ yrm test [name]
 ### 增加 wehotel 私有npm 源
 
 ``` sh
-yrm add wehotel http://10.237.149.220:4873
+yrm add wehotel http://cnpm.bestwehotel.net:7001
 ```

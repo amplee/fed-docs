@@ -6,7 +6,7 @@ title: 创建私有包
 
 详细信息请阅读 [NPM](https://www.npmjs.cn/getting-started/what-is-npm/)
 
-关于如何快速切换`npm`源，请阅读 [使用nrm切换npm源](/verdaccio/nrm.html)。
+关于如何快速切换`npm`源，请阅读 [使用nrm切换npm源](/npm/nrm.html)。
 
 以下流程，假定你已经了解，并为你本地切换源到私有`npm`。
 
@@ -24,7 +24,7 @@ title: 创建私有包
 ``` sh
 npm init
 ```
-并且你需要遵循 [私有包规范](/verdaccio/guide.html)。
+并且你需要遵循 [私有包规范](/npm/guide.html)。
 
 ## 发布
 发布私有包很简单，只需要一个命令：

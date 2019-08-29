@@ -1,7 +1,7 @@
 {
   "name": "fe-docs",
   "version": "1.0.0",
-  "description": "",
+  "description": "前端文档",
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev src",
@@ -11,11 +11,11 @@
     "type": "git",
     "url": "git@172.25.38.44:fe-gayhub/fe-docs.git"
   },
-  "author": "",
+  "author": "zhanpeng.lian",
   "license": "ISC",
   "devDependencies": {
-    "@vuepress/plugin-back-to-top": "^1.0.0-alpha.47",
-    "@vuepress/plugin-nprogress": "^1.0.0-alpha.47",
-    "vuepress": "^1.0.0-alpha.47"
+    "@vuepress/plugin-back-to-top": "^1.0.3",
+    "@vuepress/plugin-nprogress": "^1.0.3",
+    "vuepress": "^1.0.3"
   }
 }
