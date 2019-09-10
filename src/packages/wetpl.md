@@ -22,7 +22,7 @@ npm install -D @bestwehotel/we-template-cli
 
 ### 使用
 
-![wetpl](/wetpl_demo.gif)
+![wetpl](/docs/wetpl_demo.gif)
 
 * **wetpl**
 
