@@ -9,10 +9,12 @@ module.exports = {
         nav: [
             {text: '代码风格指南', link: '/style-guide/'},
             {text: '私有npm', link: '/npm/'},
+            {text: '仓库', link: '/packages/'}
         ],
         sidebar: {
             '/style-guide/': getStyleGuide('代码规范', '代码审查'),
-            '/npm/': getNpm('私有 NPM', 'NPM支持')
+            '/npm/': getNpm('私有 NPM', 'NPM支持'),
+            '/packages/': getPackages('仓库')
         },
         displayAllHeaders: true,
         repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
@@ -88,4 +90,18 @@ function getNpm(groupA, groupB) {
             // 'yrm'
         ]
     }];
+}
+
+function getPackages(groupA) {
+    return [
+        {
+            title: groupA,
+            collapsable: false,
+            children: [
+                '',
+                'wetpl',
+                'offlineApp'
+            ]
+        }
+    ]
 }

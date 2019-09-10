@@ -12,6 +12,10 @@ npm run build # 构建文档
 
 前端代码规范
 
-## /verdaccio
+## /npm
 
 私有npm仓库
+
+## /packages
+
+工具包

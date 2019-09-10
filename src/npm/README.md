@@ -6,6 +6,10 @@ home: false
 > 私有npm web地址：[http://cnpm.bestwehotel.net:7002/](http://cnpm.bestwehotel.net:7002/)
 >
 > 私有npm源地址：[http://cnpm.bestwehotel.net:7001/](http://cnpm.bestwehotel.net:7001/)
+>
+> 私有npm web地址（IP）：[http://172.25.38.39:7002/](http://172.25.38.39:7002/)
+>
+> 私有npm源地址（IP）：[http://172.25.38.39:7001/](http://172.25.38.39:7001/)
 
 ## 背景
 
