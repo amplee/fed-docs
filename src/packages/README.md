@@ -12,7 +12,7 @@ home: false
 
 ### wetpl 模板生成工具
 
-[wetpl](/packages/wetpl)
+[wetpl](/packages/wetpl.html)
 
 提供交互式命令行，支持快速创建项目，快速生成页面级模板，以及路由级模板。
 
@@ -20,6 +20,6 @@ home: false
 
 ### offlineApp 离线包打包工具
 
-[offlineApp](/packages/offlineApp)
+[offlineApp](/packages/offlineApp.html)
 
 客户端4.1.0版本 开始，客户端支持离线包模式嵌入H5应用，工具根据客户端离线包规则，帮助已接入客户端离线包方案的项目，打包生成离线包

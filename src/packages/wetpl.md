@@ -28,7 +28,7 @@ npm install -D @bestwehotel/we-template-cli
 
   全局安装后，将会添加 `wetpl`命令，你可以通过运行 `wetpl` 启动本工具。
 
-* **wetpl create**
+* **wetpl create \<project name\>**
 
   `wetpl create` 将会引导你创建一个新的项目。
 
@@ -38,7 +38,7 @@ npm install -D @bestwehotel/we-template-cli
   - 支持添加`vue-router`以及选择router模式
   - 支持添加`vuex`
 
-* **wetpl page**
+* **wetpl page \<page name\>**
 
   `wetpl page` 将会引导你在一个多页应用的项目中，根据模板生成页面。
 
