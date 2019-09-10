@@ -57,6 +57,7 @@ npm install -D @bestwehotel/we-template-cli
 模板统一维护在 `gitlab` 中，工具会在执行生成前，会从`gitlab`拉取模板资源后，下载到本地，然后根据配置生成结果。
 
 * **项目级模板**
+
   默认支持创建 PC端/移动端项目。<br />
   - 基于 webpack4的构建环境
   - 基于vue
@@ -67,6 +68,7 @@ npm install -D @bestwehotel/we-template-cli
   - 集成 `eslint`,`stylelint`
 
 * **页面级模板**
+
   支持在基于`wetpl create` 创建的项目中，生成页面。<br/>
   - 支持可选的 `vue-router`、`routerMode`，`vuex`
 
