@@ -99,7 +99,7 @@ function getPackages(groupA) {
             collapsable: false,
             children: [
                 '',
-                'wetpl',
+                'wehotelCli',
                 'offlineApp'
             ]
         }

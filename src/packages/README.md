@@ -10,9 +10,9 @@ home: false
 我们的所有工具都是发布在[私有npm](/npm/)。
 
 
-### wetpl 模板生成工具
+### wehotel-cli 模板生成工具
 
-[wetpl](/packages/wetpl.html)
+[wehotel](/packages/wehotelCli.html)
 
 提供交互式命令行，支持快速创建项目，快速生成页面级模板，以及路由级模板。
 
