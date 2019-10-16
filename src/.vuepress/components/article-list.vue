@@ -41,11 +41,10 @@
 </template>
 <script>
 import jsKou from '../utils/jskou';
-import Paginate from 'vuejs-paginate';
 export default {
     name: 'article-list',
     components: {
-        Paginate
+
     },
     data() {
         return {
@@ -59,7 +58,7 @@ export default {
             pageTotal: 0
         };
     },
-    created() {
+    mounted() {
         this.getArticle({
             type: this.type,
             page: this.page - 1
@@ -80,9 +79,9 @@ export default {
         },
         pageClick(page) {
             this.getArticle({
-            type: this.type,
-            page: page - 1
-        });
+                type: this.type,
+                page: page - 1
+            });
         }
     }
 };
