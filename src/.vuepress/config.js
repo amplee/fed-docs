@@ -9,7 +9,8 @@ module.exports = {
         nav: [
             {text: '代码风格指南', link: '/style-guide/'},
             {text: '私有npm', link: '/npm/'},
-            {text: '仓库', link: '/packages/'}
+            {text: '仓库', link: '/packages/'},
+            {text: '文章推荐', link: '/blog/'}
         ],
         sidebar: {
             '/style-guide/': getStyleGuide('代码规范', '代码审查'),
