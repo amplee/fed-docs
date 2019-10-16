@@ -43,7 +43,7 @@
 import jsKou from '../utils/jskou';
 import Paginate from 'vuejs-paginate';
 export default {
-    name: 'ArticleList',
+    name: 'article-list',
     components: {
         Paginate
     },
