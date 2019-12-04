@@ -39,9 +39,16 @@ npm install -g @bestwehotel/wehotel-cli
   1. `--cwd <cwd>`：设置创建项目的当前上下文，即创建项目的根目录
   2. `--force`：如果当前目录存在，配置此项会清空目录
 
-* **wehotel page \<page-name\>**
+* **wehotel page \<page-name\> \[target-dir\]**
 
-  当前命令尚不支持，正在开发中
+  **根据模板，在多页应用中生成新的页面级别的应用**
+
+  `<page-name>` ：页面名称。必填
+
+  `[target-dir]` ：目标目录，默认为`src/pages` 或 `src/projects`
+
+  **参数支持**
+  1. `--cwd <cwd>`: 设置当前项目上下文，即项目创建根目录。
 
 * **wehotel router \<router-name\>**
 
@@ -78,6 +85,12 @@ npm install -g @bestwehotel/wehotel-cli
 
 ## 模板
 
+模板是`wehotel-cli` 实现帮助项目提升的核心能力，`wehotel-cli`能够基于模板，为不同的项目，或者新的项目，帮助快速生成项目结构以及代码。
+
+模板可以是通用的代码模板，也可以是具体的某种业务类型的模板，一个模板库可以由多个模板文件组成，并且基于`handlebars.js`编写，这意味着，你的模板文件类型几乎不受限制。
+
+在随着模板库越来越多越来越丰富后， `wehotel-cli`会越来越强大，能够服务于各种各样的项目以及业务场景。
+
 ### 默认模板
 
 * **项目级别模板**
@@ -102,9 +115,26 @@ npm install -g @bestwehotel/wehotel-cli
     - 使用 scss作为css预编译语言
     - 集成 `eslint`,`stylelint`
 
+* **页面级模板**
+
+  * `wehotel-template-vue-page` 通用的页面级模板
+
+    - 基于vue
+    - 支持可选的 `vue-router`、`routerMode`，`vuex`
+    - 支持选择 PC端/移动端
+
 ### 开发自定义模板
 
+`wehotel-cli` 提供了十分灵活的可自定义的模板系统，你可以很方便的开发一个适合你的项目或者你所在团队的模板。
+
+* **模板示例：**
+
+  - 项目级别：[wehotel-template-mobile-vue](http://gzgit.bestwehotel.com/WeHotelFE/wehotel-template-mobile-vue)
+  - 页面级别：[wehotel-template-vue-page](http://gzgit.bestwehotel.com/WeHotelFE/wehotel-template-vue-page)
+
 * **模板目录结构**
+
+  一个完整的最简化的模板目录结构如下：
   ``` sh
   .
   ├── generator.js # 模板生成，渲染引擎配置
@@ -113,3 +143,73 @@ npm install -g @bestwehotel/wehotel-cli
   ├── readme.md # 模板使用说明
   └── template # 模板文件目录
   ```
+* **package.json**
+
+  `package.json` 即包管理文件，这个文件与普通的`package.json`是相同的，不同在于，会新增`wehotelConfig`的配置:
+  ``` json
+  // package.json
+  {
+      // ...
+      "wehotelConfig": {
+          "type": "[type]",
+          "name": "[name]"
+      }
+  }
+  ```
+  - `type`: 模板类型，当前模板支持:
+    -  `project`: 项目级别模板
+    -  `page`: 子应用级别模板
+    -  `router`: 路由页面级别模板
+  - `name`: 模板名称
+
+  `wehotel-cli`会读取模板的`package.json`文件中的`wehotelConfig`配置，使用不同命令时，将会通过`type`生成对应的模板选择列表，`name`则作为模板选择时的名称。
+
+* **prompt.js**
+
+  `prompt.js` 允许你创建自定义的交互式命令行对话内容，得到的数据结果可用于模板数据。<br>
+  如果你的模板不需要自定义的交互式命令行对话内容，你也可以不创建这个文件，直接忽略它。
+
+  `prompt.js` 暴露的内容，可以是`object | array | function`，不同的暴露方式，有不同的要求：
+  * 暴露一个`object`, 请看下面示例
+    ``` js
+    module.exports = {
+        featureOption: true, // 特性开关
+        // 交互式对话内容
+        prompts: [
+            {
+                type: 'confirm',
+                name: 'data',
+                message: '自定义的交互对话内容'
+            }
+        ]
+    };
+    ```
+  * 暴露一个`array`，请看下面示例：
+    ``` js
+    module.exports = [
+        {
+            type: 'confirm',
+            name: 'data',
+            message: '自定义的交互对话内容'
+        }
+    ];
+    ```
+  * 暴露一个`function`, 请看下面示例：
+    ``` js
+    /**
+     * @param {string} name 名称
+     * @param {string} context 当前项目上下文
+     * @param {string} targetPath 目标路径
+     */
+    module.exports = function (name, context, targetPath) {
+        this.featureOption = true;
+        return [
+            {
+                type: 'confirm',
+                name: 'data',
+                message: '自定义的交互对话内容'
+            }
+          ];
+      }
+      ```
+  当定义为`function` 时，`prompt.js` 是最灵活的，你可以定义到

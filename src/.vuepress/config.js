@@ -101,7 +101,8 @@ function getPackages(groupA) {
             children: [
                 '',
                 'wehotelCli',
-                'offlineApp'
+                'offlineApp',
+                'microFe'
             ]
         }
     ]
