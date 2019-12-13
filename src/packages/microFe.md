@@ -193,6 +193,7 @@ registerMicroApp('microName', {
 #### vue实例化,注入方法
 
 * **this.$isMicroApp** ：判断当前是否是微前端环境
+
 * **this.$microRouter**
 
   微前端路由，只在主应用有效，主应用中切换子应用，应使用`this.$microRouter` 下的方法。<br>
@@ -207,11 +208,153 @@ registerMicroApp('microName', {
   参数<br>
   microName: 子应用名称，不传则获取所有配置。
 
+### 事件通信
+
+微前端事件通信模块，主要处理 主应用与子应用、子应用与子应用间的数据通信。
+
+**两种获取 获取微前端事件通信的方法：**
+
+* **this.$microEvent**
+
+  在主应用与子应用下均可使用。
+
+* **microEvent()**
+
+  ```js
+  import { microEvent } from '@bestwehotel/micro-front-end';
+
+  microEvent().on('demo', function(data){});
+  ```
+
+所有事件均支持注册多个监听。
+
+**API**
+
+- `this.$microEvent.on(handleName, handler, flag)`
+
+  事件注册方法，该方法可以在任意应用中添加，可以被 emit、waitEmit 的不同机制触发。
+
+  - `handleName`:  事件名称
+  - `handler`:  事件回调，参数为 emit方法传入的`data`
+  - `flag`:   注册监听标记符，当子应用从微前端完全卸载时，需要通过标记符卸载子应用的注册事件，标记符必须是 **子应用名称** 。在通过 `namespace(microName)` :  创建子应用命名空间的事件模块时，`flag`默认为传入的 `microName`。
+
+- `this.$microEvent.onBefore(handleName, handler, flag)`
+
+  注册事件触发前置钩子，该钩子会在 `on`注册事件被触发前触发，并且最好在 `on` 方法定义之前定义。
+
+  - `handleName`:  事件名称，与需要前置处理的事件保持名称一致，内置前置钩子
+
+    `default`，对所有事件有效
+
+  - `handler`:  事件回调
+
+- `this.$microEvent.onAfter(handleName, handler, flag)`
+
+  注册事件触发后置钩子，该钩子会在`on`注册事件被触发后触发，并且最好在 `on`方法定义之前定义。
+
+  - `handleName:`  事件名称，与需要前置处理的事件保持名称一致，内置前置钩子
+
+    `default`，对所有事件有效
+
+  - `handler`:  事件回调
+
+  
+
+- `this.$microEvent.once(handleName, handler)`
+
+  注册一次事件，该事件只执行一次，完成后被删除。
+
+  
+
+- `this.$microEvent.emit(handleName, data, option)`
+
+  事件派发，向所有监听派发事件。
+
+  - `handleName`:  事件名称
+  - `data`: 派发的数据
+  - `option` :  `{object}`  配置
+    - `wait` ：延迟事件派发，直到有事件监听注册进来后派发事件，已注册的监听会直接出发。默认值为 `false`，不延迟派发，`once`只延迟派发一次，对下一个注册的监听直接触发，后续注册的监听不触发，`all` 最后续的注册监听都会直接触发。
+
+  
+
+- `this.$microEvent.waitEmit(handleName, data, wait)`
+
+  延迟派发事件的别名方法。
+
+- `this.$microEvent.namespace(microName)`
+
+  通过命名空间创建事件模块，拥有事件模块的所有方法，当前命名空间的事件模块不可触发其他命名空间的事件，但可以通过`this.$microEvent.emit()` 触发。
+
+**延迟派发指的是，允许 注册事件监听在派发之后。派发之后注册是事件也可以被最后一次派发的触发执行。**
+
+**场景示例**
+
+1. 子应用向主应用发起事件通信，由于主应用必然早于子应用完成加载执行，
+
+   ``` js
+   // 主应用
+   this.$microEvent.on('logout', data => {
+       logout();
+   });
+   // 子应用
+   this.$microEvent.emit('logout');
+   ```
+
+2. 主应用向子应用派发事件，在这个场景下，子应用可能还未加载进行实例化，可以通过延迟方式进行事件派发。
+
+   ``` js
+   // 主应用 向所有子应用发送 token
+   this.$microEvent.waitEmit('token'， {token}, 'all');
+   // 子应用
+   this.$microEvent.on('token', data => {
+       console.log(data.token);
+   }, 'microName');
+   ```
+
+3. 子应用 向 子应用 派发事件
+
+   ``` js
+   // 子应用 A
+   this.$microEvent.waitEmit('send-B', data);
+   // 子应用 B
+   this.$microEvent.on('send-B', data => {
+       console.log(data);
+   }, 'B');
+   ```
+
+4. 通过命名空间创建事件模块
+
+   ``` js
+   // 子应用 A 的私有事件模块
+   const eventA = this.$microEvent.namespace('A');
+   
+   // 此时的事件名称为 A/demo
+   eventA.on('demo', data => {});
+   // 触发的事件名称为 A/demo
+   eventA.emit('demo');
+   
+   // 你也可以在子应用B中获取子应用A的私有事件模块
+   // 这样可以在两个子应用之间建立独享的事件通讯
+   // 子应用B
+   const eventA = this.$microEvent.namespace('A');
+   eventA.on('A.name', data => {
+       console.log(data);
+   });
+   // 子应用A
+   const eventA = this.$microEvent.namespace('A');
+   eventA.waitEmit('A.name', {name: 'A'});
+   
+   ```
+
+**高级用法**
+
+待补充
+
 ### 内置模块：`@bestwehotel/name-chunk-ids-webpack-plugin`
 
 发布于私有npm。（[私有npm使用](/npm/)）
 
-[@bestwehotel/name-chunk-ids-webpack-plugin](http://cnpm.bestwehotel.net:7002/package/@bestwehotel/name-chunk-ids-webpack-plugin)
+@bestwehotel/name-chunk-ids-webpack-plugin](http://cnpm.bestwehotel.net:7002/package/@bestwehotel/name-chunk-ids-webpack-plugin)
 
 用于微前端应用中，打包时，重命名所有 chunkId，目的是为了避免多个应用的chunk命名冲突，同时为 微前端卸载子应用提供支持。
 
