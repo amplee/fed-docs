@@ -258,13 +258,13 @@ registerMicroApp('microName', {
 
   - `handler`:  事件回调
 
-  
+
 
 - `this.$microEvent.once(handleName, handler)`
 
   注册一次事件，该事件只执行一次，完成后被删除。
 
-  
+
 
 - `this.$microEvent.emit(handleName, data, option)`
 
@@ -275,7 +275,7 @@ registerMicroApp('microName', {
   - `option` :  `{object}`  配置
     - `wait` ：延迟事件派发，直到有事件监听注册进来后派发事件，已注册的监听会直接出发。默认值为 `false`，不延迟派发，`once`只延迟派发一次，对下一个注册的监听直接触发，后续注册的监听不触发，`all` 最后续的注册监听都会直接触发。
 
-  
+
 
 - `this.$microEvent.waitEmit(handleName, data, wait)`
 
@@ -327,12 +327,12 @@ registerMicroApp('microName', {
    ``` js
    // 子应用 A 的私有事件模块
    const eventA = this.$microEvent.namespace('A');
-   
+
    // 此时的事件名称为 A/demo
    eventA.on('demo', data => {});
    // 触发的事件名称为 A/demo
    eventA.emit('demo');
-   
+
    // 你也可以在子应用B中获取子应用A的私有事件模块
    // 这样可以在两个子应用之间建立独享的事件通讯
    // 子应用B
@@ -343,12 +343,115 @@ registerMicroApp('microName', {
    // 子应用A
    const eventA = this.$microEvent.namespace('A');
    eventA.waitEmit('A.name', {name: 'A'});
-   
+
    ```
 
-**高级用法**
+**高阶用法**
 
-待补充
+微前端事件通信提供了丰富的功能，以满足多种多样的复杂场景，特别是在`waitEmit`允许在事件注册前派发事件，注册后立即触发，对微前端下多场景的通信提供了灵活多变的能力。
+
+* **主应用向所有子应用派发数据**
+
+  在微前端中，子应用通过异步加载到主应用，两者之间是异步的，子应用存在晚于主应用派发事件后才注册事件，通过 waitEmit，可以向所有子应用派发数据。
+
+  ``` js
+  // 假设在事件规范中，定了 broadcast/ 为主应用向子应用派发事件的命名空间
+  // 其中 broadcast/init 事件，用于向子应用初始化时获取主应用数据
+  
+  // 主应用
+  // all 标识 标识，向后续所有该事件新增注册派发
+  this.$microEvent.waitEmit('broadcast/init', { token, userInfo }, 'all');
+  
+  // 子应用 xxx
+  // main.js or 其他 子应用基础模块
+  // 由于 主应用通过 waitEmit 派发，当子应用注册事件监听时，会立即触发该事件
+  this.$microEvent.on('broadcast/init', ({ token, userInfo }) => {
+      console.log(token, userInfo)
+  }, 'microName');
+  ```
+
+* **主应用向特定子应用派发数据**
+
+  主应用也可以通过 waitEmit 向特定的子应用派发数据。
+
+  ``` js
+  // broadcast/init 事件，向特定子应用初始化时派发主应用数据
+  
+  // 主应用
+  // microName-A 为子应用名称，也即 on事件的 flag 参数
+  this.$microEvent.waitEmit('broadcast/init', { token, userinfo }, 'microName-A');
+  
+  // 子应用 microName-A
+  // main.js or 其他 子应用基础模块
+  // 由于 主应用通过 waitEmit 派发，当子应用注册事件监听时，会立即触发该事件
+  this.$microEvent.on('broadcast/init', ({ token, userInfo }) => {
+      console.log(token, userInfo)
+  }, 'microName-A');
+  
+  ```
+
+  
+
+* **事件前置钩子**
+
+  事件前置钩子，相当于事件执行前的拦截器，允许在前置钩子中，对 派发的数据进行处理。监听事件中，对data的修改不会继续往后传。
+
+  ``` js
+  // 通过前置钩子对 派发的数据 进行拦截处理
+  this.$microEvent.onBefore('broadcast/data', data => {
+      console.log('before', data);
+      // 可以直接对data进行操作
+      data.a = 2;
+      data.b = 3;
+      data.c = 4;
+      return data;
+  });
+  
+  this.$microEvent.on('broadcast/data', data => {
+      console.log('on', data);
+  });
+  
+  this.$microEvent.emit('broadcast/data', {
+      a: 1,
+      b: 2,
+      c: 3
+  });
+  
+  // output:
+  // before {a:1,b:2,c:3}
+  // on {a:2,b:3,c:4}
+  
+  ```
+
+  
+
+* **事件后置钩子**
+
+  事件后置钩子指在 emit派发后，触发监听事件后，再执行的一系列方法，允许你在完成监听后 进一部处理。在这个阶段，获取到的数据，同样是 前置钩子处理过的数据，
+
+  ``` js
+  // 完成 on监听事件后，做一些其他的处理
+  this.$microEvent.onAfter('broadcast/data', data => {
+      console.log('after', data);
+      // do something...
+  });
+  
+  this.$microEvent.on('broadcast/data', data => {
+      console.log('on', data);
+  });
+  
+  this.$microEvent.emit('broadcast/data', {
+      a: 1,
+      b: 2,
+      c: 3
+  });
+  
+  // output:
+  // 'on' {a:1,b:2,c:3}
+  // 'after' {a:1,b:2,c:3}
+  ```
+
+  
 
 ### 内置模块：`@bestwehotel/name-chunk-ids-webpack-plugin`
 
