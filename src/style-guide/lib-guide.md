@@ -4,9 +4,11 @@ title: 库/框架风格指南
 
 ## Vue 项目
 
-Vue官方提供的风格指南是十分优秀的 Vue风格指南，所以基于Vue的项目直接参考官方指南即可：
+Vue官方提供的风格指南是十分优秀的 Vue风格指南，所以基于Vue的项目直接参考官方指南：
 
 [Vue 风格指南](https://cn.vuejs.org/v2/style-guide/)
+
+[eslint-plugin-vue](https://eslint.vuejs.org/)
 
 ## React 项目
 

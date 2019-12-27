@@ -161,7 +161,54 @@ module.exports = {
 
 ## Vue项目配置
 
+在基于 常规项目的配置下，需要安装 [eslint-plugin-vue](https://eslint.vuejs.org/)
 
+__.eslintrc.js__
+``` js
+module.exports = {
+    root: true,
+    parserOptions: {
+        parser: 'babel-eslint',
+        sourceType: 'module'
+    },
+    env: {
+        browser: true
+    },
+    extends: [
+        'standard',
+        'plugin:vue/recommended'
+    ],
+    plugins: [
+        'vue'
+    ],
+    rules: {
+        'indent': ['error', 4],
+        'space-before-function-paren': ["error", {
+            "anonymous": "always",
+            "named": "never",
+            "asyncArrow": "ignore"
+        }],
+        'no-tabs': 'off',
+        'eqeqeq': 'off',
+        'semi': ['error', 'always'],
+        'arrow-parens': 0,
+        'generator-star-spacing': 0,
+        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+        'padded-blocks': 0, // 不允许块级开始或结束有空行
+        'comma-dangle': 0, // 要求或禁止使用拖尾逗号
+        'vue/script-indent': ['error', 4],
+        'vue/html-indent': ['error', 4],
+        'vue/name-property-casing': ['error', 'PascalCase'], // 默认 PascalCase
+        'vue/html-self-closing': ['error', {
+            'html': {
+                'void': 'never',
+                'normal': 'any',
+                'component': 'always'
+            }
+        }]
+    }
+}
+```
 
 ## 项目修复
 
