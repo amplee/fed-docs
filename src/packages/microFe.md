@@ -357,11 +357,11 @@ registerMicroApp('microName', {
   ``` js
   // 假设在事件规范中，定了 broadcast/ 为主应用向子应用派发事件的命名空间
   // 其中 broadcast/init 事件，用于向子应用初始化时获取主应用数据
-  
+
   // 主应用
   // all 标识 标识，向后续所有该事件新增注册派发
   this.$microEvent.waitEmit('broadcast/init', { token, userInfo }, 'all');
-  
+
   // 子应用 xxx
   // main.js or 其他 子应用基础模块
   // 由于 主应用通过 waitEmit 派发，当子应用注册事件监听时，会立即触发该事件
@@ -376,21 +376,21 @@ registerMicroApp('microName', {
 
   ``` js
   // broadcast/init 事件，向特定子应用初始化时派发主应用数据
-  
+
   // 主应用
   // microName-A 为子应用名称，也即 on事件的 flag 参数
   this.$microEvent.waitEmit('broadcast/init', { token, userinfo }, 'microName-A');
-  
+
   // 子应用 microName-A
   // main.js or 其他 子应用基础模块
   // 由于 主应用通过 waitEmit 派发，当子应用注册事件监听时，会立即触发该事件
   this.$microEvent.on('broadcast/init', ({ token, userInfo }) => {
       console.log(token, userInfo)
   }, 'microName-A');
-  
+
   ```
 
-  
+
 
 * **事件前置钩子**
 
@@ -406,24 +406,24 @@ registerMicroApp('microName', {
       data.c = 4;
       return data;
   });
-  
+
   this.$microEvent.on('broadcast/data', data => {
       console.log('on', data);
   });
-  
+
   this.$microEvent.emit('broadcast/data', {
       a: 1,
       b: 2,
       c: 3
   });
-  
+
   // output:
   // before {a:1,b:2,c:3}
   // on {a:2,b:3,c:4}
-  
+
   ```
 
-  
+
 
 * **事件后置钩子**
 
@@ -435,29 +435,29 @@ registerMicroApp('microName', {
       console.log('after', data);
       // do something...
   });
-  
+
   this.$microEvent.on('broadcast/data', data => {
       console.log('on', data);
   });
-  
+
   this.$microEvent.emit('broadcast/data', {
       a: 1,
       b: 2,
       c: 3
   });
-  
+
   // output:
   // 'on' {a:1,b:2,c:3}
   // 'after' {a:1,b:2,c:3}
   ```
 
-  
+
 
 ### 内置模块：`@bestwehotel/name-chunk-ids-webpack-plugin`
 
 发布于私有npm。（[私有npm使用](/npm/)）
 
-@bestwehotel/name-chunk-ids-webpack-plugin](http://cnpm.bestwehotel.net:7002/package/@bestwehotel/name-chunk-ids-webpack-plugin)
+[@bestwehotel/name-chunk-ids-webpack-plugin](http://cnpm.bestwehotel.net:7002/package/@bestwehotel/name-chunk-ids-webpack-plugin)
 
 用于微前端应用中，打包时，重命名所有 chunkId，目的是为了避免多个应用的chunk命名冲突，同时为 微前端卸载子应用提供支持。
 
@@ -475,4 +475,183 @@ module.exports = {
 
 ## 部署
 
-待补充
+### 主应用部署
+
+* **jenkins配置**
+
+  以下以会员通微前端主应用为例：
+  1. 创建一个 jenkins pipeline 流水线任务，选择 `This project is parameterized` 。添加`Git Parameterized` , 其中，`name`的值为`branch`，`Parameter Type`的值为`Branch`，`Default Value`值为`master`。添加`Boolean Parameter`，`name`为 install，用于更新 项目第三方依赖库。
+  2. Pipeline script 配置：
+
+  ``` groovy
+  pipeline {
+      agent any
+      parameters {
+          gitParameter branchFilter: 'origin/(feature/.*|release|dev|master|poc)', // 分支选择配置
+          defaultValue: 'master', // 默认分支
+          listSize: '10', sortMode: 'ASCENDING_SMART',
+          name: 'branch', type: 'PT_BRANCH',
+          useRepository: '' // 这里填写项目的gitlab仓库地址
+      }
+      stages {
+          stage('Checkout') {
+              steps {
+                  git branch: "${params.branch}", url: '' // 这里填写项目的gitlab仓库地址
+              }
+          }
+          stage('Install') {
+              when {
+                  expression {
+                      return params.install
+                  }
+              }
+              steps {
+                  sh "cd ${WORKSPACE}"
+                  // sh "rm -rf node_modules/"
+                  sh "npm install"
+              }
+          }
+          stage('Build') {
+              steps {
+                  // 这部分需要根据前端不同项目的构建命令进行修改
+                  sh "npm run build:prev"
+                  // 打包的包准备好压缩包，等待上传发布
+                  sh "zip -q -r hytMain.zip hytMain"
+              }
+          }
+          stage('Publish') {
+              steps {
+                  // 发布资源到远程服务器
+                  script {
+                      def remote = [:]
+                      remote.name = 'root'
+                      remote.host = ''
+                      remote.user = ''
+                      remote.password = ''
+                      remote.allowAnyHosts = true
+                      sshPut remote: remote, from: 'hytMain.zip', into: '/home/hytTest'
+                      sshCommand remote: remote, command: 'cd /home/hytTest && rm -rf hytMain && unzip -o hytMain.zip && rm -rf hytMain.zip && cp -ruf hytMain/library/* library/'
+                  }
+              }
+          }
+      }
+  }
+
+  ```
+
+* **Nginx 配置**
+
+  ``` nginx
+  	location / {
+          root /home/hytTest/hytMain;
+          index index.html;
+          client_max_body_size  100m;
+          proxy_set_header  X-Real-IP $remote_addr;
+          proxy_set_header  REMOTE-HOST $remote_addr;
+          proxy_set_header  Host $host:$server_port;
+          proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+          if ($request_filename ~* "\.html$") {
+              add_header Cache-Control max-age=0,no-cache;
+          }
+          if ($request_filename ~* "\.(js|css)$") {
+              expires 72h;
+          }
+      }
+  	location ^~ /library {
+          root /home/hytTest;
+          client_max_body_size  100m;
+          proxy_set_header  X-Real-IP $remote_addr;
+          proxy_set_header  REMOTE-HOST $remote_addr;
+          proxy_set_header  Host $host:$server_port;
+          proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+          if ($request_filename ~* "\.(js|css)$") {
+              expires 72h;
+          }
+      }
+  ```
+
+### 子应用部署
+
+* **jenkins配置**
+
+  以下以会员通微前端主应用为例：
+
+  1. 创建一个 jenkins pipeline 流水线任务，选择 `This project is parameterized` 。添加`Git Parameterized` , 其中，`name`的值为`branch`，`Parameter Type`的值为`Branch`，`Default Value`值为`master`。添加`Boolean Parameter`，`name`为 install，用于更新 项目第三方依赖库。
+  2. Pipeline script 配置：
+
+  ``` groovy
+  pipeline {
+      agent any
+      parameters {
+          gitParameter branchFilter: 'origin/(feature/.*|release|dev|master|poc)',
+          defaultValue: 'master',
+          listSize: '10', sortMode: 'ASCENDING_SMART',
+          name: 'branch', type: 'PT_BRANCH',
+          useRepository: ''
+      }
+      stages {
+          stage('Checkout') {
+              steps {
+                  git branch: "${params.branch}", url: ''
+              }
+          }
+          stage('Install') {
+              when {
+                  expression {
+                      return params.install
+                  }
+              }
+              steps {
+                  sh "cd ${WORKSPACE}"
+                  // sh "rm -rf node_modules/"
+                  sh "npm install"
+              }
+          }
+          stage('Build') {
+              steps {
+                  // 这部分需要根据前端不同项目的构建命令进行修改
+                  sh "npm run build:prev"
+                  // 打包的包准备好压缩包，等待上传发布
+                  sh "zip -q -r comment.zip comment"
+              }
+          }
+          stage('Publish') {
+              steps {
+                  script {
+                      def remote = [:]
+                      remote.name = 'root'
+                      remote.host = ''
+                      remote.user = ''
+                      remote.password = ''
+                      remote.allowAnyHosts = true
+                      sshPut remote: remote, from: 'comment.zip', into: '/home/hytTest'
+                      sshCommand remote: remote, command: 'cd /home/hytTest && rm -rf comment && unzip -o comment.zip && rm -rf comment.zip'
+                  }
+                  sh "npm run post:prev"
+              }
+          }
+      }
+  }
+
+  ```
+
+* **Nginx配置**
+
+  ``` nginx
+  	location ^~ /comment {
+          root /home/hytTest;
+          index index.html;
+          client_max_body_size  100m;
+          proxy_set_header  X-Real-IP $remote_addr;
+          proxy_set_header  REMOTE-HOST $remote_addr;
+          proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+          if ($request_filename  ~* "\.html$") {
+              add_header Cache-Control max-age=0,no-cache;
+          }
+          if ($request_filename ~* "\.(js|css)$") {
+              expires 72h;
+          }
+      }
+  ```
+
+  
