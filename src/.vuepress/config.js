@@ -1,3 +1,13 @@
+const archerSidebar = [
+    {
+        title: '代码生成器',
+        collapsable: false,
+        children: [
+            ''
+        ]
+    },
+];
+
 module.exports = {
     port: 8302,
     dest: 'docs',
@@ -6,29 +16,35 @@ module.exports = {
     title: 'WeHotel 前端文档',
     // permalink: '/:slug',
     themeConfig: {
+        lastUpdated: '上次更新',
         nav: [
             {text: '代码风格指南', link: '/style-guide/'},
             {text: '私有npm', link: '/npm/'},
             {text: '仓库', link: '/packages/'},
-            {text: '文章推荐', link: '/blog/'}
+            {text: '文章推荐', link: '/blog/'},
+            {text: '代码生成器', link: '/archer/'}
         ],
         sidebar: {
             '/style-guide/': getStyleGuide('代码规范', '代码审查'),
             '/npm/': getNpm('私有 NPM', 'NPM支持'),
-            '/packages/': getPackages('仓库')
+            '/packages/': getPackages('仓库'),
+            '/archer/': archerSidebar
         },
         displayAllHeaders: true,
         repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
         repoLabel: '查看源码',
     },
-    lastUpdated: {
-        transformer: (timestamp) => {
-            var date = new Date();
-            date.setTime(timestamp);
-            return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
-        }
-    },
     plugins: [
+        [
+            '@vuepress/last-updated',
+            {
+                transformer: (timestamp) => {
+                    var date = new Date();
+                    date.setTime(timestamp);
+                    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
+                }
+            }
+        ],
         ['@vuepress/back-to-top', true],
         ['@vuepress/nprogress', true]
     ]

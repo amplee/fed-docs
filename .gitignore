@@ -10,3 +10,4 @@ selenium-debug.log
 *.zip
 .vscode
 docs/
+.temp

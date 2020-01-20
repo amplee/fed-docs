@@ -4,7 +4,7 @@
   "description": "前端文档",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev src",
+    "dev": "vuepress dev src --temp .temp",
     "build": "vuepress build src"
   },
   "repository": {
