@@ -22,13 +22,15 @@ module.exports = {
             {text: '私有npm', link: '/npm/'},
             {text: '仓库', link: '/packages/'},
             {text: '文章推荐', link: '/blog/'},
-            {text: '代码生成器', link: '/archer/'}
+            {text: '代码生成器', link: '/archer/'},
+            {text: '智慧门店助手', link: '/wisdom-hotel-helper/'}
         ],
         sidebar: {
             '/style-guide/': getStyleGuide('代码规范', '代码审查'),
             '/npm/': getNpm('私有 NPM', 'NPM支持'),
             '/packages/': getPackages('仓库'),
-            '/archer/': archerSidebar
+            '/archer/': archerSidebar,
+            '/wisdom-hotel-helper/': getWisdomHotelHelper()
         },
         displayAllHeaders: true,
         repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
@@ -119,6 +121,19 @@ function getPackages(groupA) {
                 'wehotelCli',
                 'offlineApp',
                 'microFe'
+            ]
+        }
+    ]
+}
+
+function getWisdomHotelHelper() {
+    return [
+        {
+            title: '智慧门店助手',
+            collapsable: false,
+            children: [
+                '',
+                'widget'
             ]
         }
     ]

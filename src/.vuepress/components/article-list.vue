@@ -23,7 +23,7 @@
                         target="_blank"
                     >
                         <span>[{{ article.time }}]</span>
-                        {{ article.title }}
+                        <span>{{ article.title }}</span>
                     </a>
                 </li>
             </ul>
@@ -82,6 +82,7 @@ export default {
                 type: this.type,
                 page: page - 1
             });
+            document.documentElement.scrollTop = 0;
         }
     }
 };
@@ -107,11 +108,15 @@ export default {
         .article-list {
             list-style: none;
             a {
-                display: block;
+                display: flex;
                 color: $textColor;
                 padding: 5px 10px;
                 span {
                     margin-right: 10px;
+                }
+                span:last-of-type {
+                    flex: 1;
+                    margin-right: 0;
                 }
                 &:hover {
                     color: $accentColor;
