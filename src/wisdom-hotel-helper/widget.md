@@ -17,7 +17,7 @@ title: Widget 开发规范
 
 ## 开发工具
 
-为了方便不同的业务团队定制、开发`Widget`，我们提供了`@bestwehotel/smart-widget-cli` 开发工具。开发者可以通过下载安装该工具进行`Widget`开发。
+为了方便不同的业务团队定制、开发`Widget`，我们提供了`@bestwehotel/wisdom-widget-cli` 开发工具。开发者可以通过下载安装该工具进行`Widget`开发。
 
 ## 安装
 
@@ -25,18 +25,18 @@ title: Widget 开发规范
 
 ## 使用
 
-工具安装完成后，生成全局命令行工具`smart-widget`，可以通过该命令行进行`Widget` 开发的流程。
+工具安装完成后，生成全局命令行工具`wisdom-widget`，可以通过该命令行进行`Widget` 开发的流程。
 
 * **开发者登录**
 
   ``` sh
-  smart-widget login <developer-token>
+  wisdom-widget login <developer-token>
   ```
   其中， developer-token为开发者token，可在智慧门店助手管理平台登录后，在用户设置中获取该token。
 
 * **创建Widget项目**
   ``` sh
-  smart-widget create <widget-name>
+  wisdom-widget create <widget-name>
   ```
   该命令行会创建一个Widget项目，并通过交互式命令行，指引你完善 widget所属团队，生成widgetID等。
 
@@ -58,14 +58,14 @@ title: Widget 开发规范
   ``` sh
   npm run serve
   # or
-  smart-widget serve
+  wisdom-widget serve
   ```
 * **构建Widget生产包**
 
   ``` sh
   npm run build
   # or
-  smart-widget build
+  wisdom-widget build
   ```
   构建前，需要选择Widget版本。
   构建后资源将生成到 `dist/` 目录中，等待发布。
@@ -75,7 +75,7 @@ title: Widget 开发规范
   ``` sh
   npm run publish
   # or
-  smart-widget publish
+  wisdom-widget publish
   ```
 
 ## 开发说明
