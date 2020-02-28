@@ -180,7 +180,7 @@ Widget项目开发目录说明：
           </button>
       </div>
   </template>
-  <style lang="scss">
+  <style lang="scss" module>
       .wrapper {
           width: 100%;
       }
