@@ -158,6 +158,43 @@ Widget项目开发目录说明：
 
   支持使用`SASS`编写CSS。
 
+* **CSS modules**
+
+  由于在智慧门店助手中，存在同一个widget，使用不同的版本渲染消息。为了防止CSS className冲突，widget的所有CSS都将通过`css modules` 进行编译，重写 className，以确保className的唯一性。并内联到js中。
+
+  重写后 className 格式为：
+
+  ```sh
+  [widget:hash:5]_[name]_[local]_[hash:base64:5]
+  ```
+
+  你可以通过以下方式使用 css，
+
+  `block.vue`：
+
+  ``` html
+  <template>
+      <div :class="$style.wrapper">
+          <button :class="[$style.btn, $style.btnDefault]">
+              按钮
+          </button>
+      </div>
+  </template>
+  <style lang="scss">
+      .wrapper {
+          width: 100%;
+      }
+
+      .btn {
+          width: 200px;
+
+          &.btn-default {
+              color: #ccc;
+          }
+      }
+  </style>
+  ```
+
 * **静态资源支持**
 
   包括图片资源，字体资源等，均可编译到`Widget`中。
