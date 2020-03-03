@@ -321,3 +321,65 @@ Widget项目开发目录说明：
 | choice    | `{{choice[map]|defaultValue}\}`   | 下拉选择，下拉选择框     |
 | radio     | `{{radio[map]|defaultValue}\}`    | 单选，单选框             |
 | checkbox  | `{{checkbox[map]|defaultValue}\}` | 多选，多选框             |
+
+
+## Widget 开发 API
+
+在widiget 开发流程中，内置了一些常用的 属性， API，以及 工具库，帮助 widget 使用 智慧门店助手提供的能力，更好的完成 widget开发。
+
+### 组件内置 props
+
+组件内置的 props，在widget的，配置在 `widget.config.js` 的 widgetComponent 组件，均可使用。
+
+
+* **Props: message**
+
+  `message` props属性提供了 当前消息内容数据的基础数据部分, 提供的数据如下：
+
+  | 属性       | 类型      | 描述                               |
+  | ---------- | --------- | ---------------------------------- |
+  | id         | string    | 消息ID                             |
+  | title      | string    | 消息标题                           |
+  | createTime | timestamp | 消息创建时间                       |
+  | startTime  | timestamp | 消息开始生效时间                   |
+  | endTime    | timestamp | 消息失效时间（表示消息为限时消息） |
+  | cancelable | boolean   | 消息是否可忽略                     |
+  | type       | string    | 消息类型（任务、建议、通知等）     |
+  | status     | string    | 消息状态                           |
+  | toUser     | string    | 消息目标用户                       |
+  | toInnId    | string    | 消息目标门店                       |
+  | templateId | string    | 消息模板编号                       |
+  | tenantId   | string    | 租户编号                           |
+
+* **Props: widget**
+
+  `widget`props 属性提供了当前widget的相关信息
+
+  | 属性          | 类型           | 描述                  |
+  | ------------- | -------------- | --------------------- |
+  | id            | string         | widget Id             |
+  | version       | string         | widget version        |
+  | componentList | array\<string> | Widget 提供的组件列表 |
+
+* **Props: data**
+
+  `data`props 属性提供了消息内容的自定义数据，提供的数据结构由`data.model.json` 提供，业务推送消息的数据接口需要符合`data.model.json`声明的数据模型。
+
+示例：
+
+```html
+<template>
+    <div class="widget-wrapper">
+        <h3>{{ message.title }}</h3>
+        <p>{{ data.customData }}</p>
+    </div>
+</template>
+<script>
+    export default {
+        mounted() {
+            const { id, version, componentList } = this.widget;
+            console.log(id, version, componentList);
+        }
+    }
+</script>
+```
