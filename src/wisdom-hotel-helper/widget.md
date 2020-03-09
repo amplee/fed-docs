@@ -15,19 +15,23 @@ title: Widget 开发规范
 
 在智慧门店助手接入规范中，开发者需要具备 该团队下的开发者权限，才能发布`Widget`。查看 [团队权限管理]()，获取相关内容。
 
-## 开发工具
+## 开发工具 <Badge text="alpha" type="warning" />
 
 为了方便不同的业务团队定制、开发`Widget`，我们提供了`@bestwehotel/wisdom-widget-cli` 开发工具。开发者可以通过下载安装该工具进行`Widget`开发。
 
-## 安装
+## 安装 <Badge text="Beta" />
 
-工具尚未开发完成，完成并发布后提供 安装文档。
+工具发布在 私有npm， 请有阅读 [私有npm](/npm/)
+
+``` sh
+npm i -g @bestwehotel/wisdom-widget-cli
+```
 
 ## 使用
 
 工具安装完成后，生成全局命令行工具`wisdom-widget`，可以通过该命令行进行`Widget` 开发的流程。
 
-* **开发者登录**
+* **开发者登录** <Badge text="未开发功能" type="warning" />
 
   ``` sh
   wisdom-widget login <developer-token>
@@ -314,7 +318,7 @@ Widget项目开发目录说明：
 | 类型      | 使用                            | 描述                     |
 | --------- | ------------------------------- | ------------------------ |
 | 固定值    | string                          | 普通文本，固定值         |
-| text      | `{{text|defaultValue}\}`         | 文本内容，文本输入框     |
+| text      | `{{text|defaultValue}\}`        | 文本内容，文本输入框     |
 | multiText | `{{multiText|defaultValue}\}`  | 多行文本，多行文本输入框 |
 | number    | `{{number|defaultValue}\}`        | 数字，数字输入框         |
 | date      | `{{date|defaultValue}\}`          | 日期选择，日期选择器     |
@@ -383,3 +387,35 @@ Widget项目开发目录说明：
     }
 </script>
 ```
+
+### 内置widget工具 widget-util <Badge text="alpha" type="warning" />
+
+widget 内置了一系列 可用方法，以适配不同的widget开发。
+
+__目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
+
+* **isElectron()** <Badge text="Beta" />
+
+  判断当前环境是否是 electron 应用
+  ``` js
+  import { isElectron } from 'widget-util';
+  console.log(isElectron());
+  ```
+* **openWorkDialog(messageId, componentName)** <Badge text="alpha" type="warning" />
+
+  打开工作区模态框
+  ``` js
+  import { openWorkDialog } from 'widget-util';
+  openWorkDialog('0001', 'detail');
+  ```
+* **openWorkWindow({ messageId, componentName, url })** <Badge text="alpha" type="warning" />
+
+  打开工作区独立窗口。
+
+  componentName 和 url 两个参数只能传其中一个， 优先使用 componentName。
+
+  传入componentName时， 加载 widget内置组件。 传入 url 时， 打开第三方网页。
+
+* **其他**
+
+  暂无其他方法，持续补充中。
