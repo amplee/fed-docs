@@ -106,25 +106,34 @@ Widget项目开发目录说明：
 
   ```js
   module.exports = {
-      // 声明 widget 包含的，需要暴露给助手使用的组件。
+    // 声明 widget 包含的，需要暴露给助手使用的组件。
   	widgetComponent: {
           // 约定使用 block组件渲染消息列表item、通知列表item。
   		block: 'src/block.vue',
           // 约定使用bubble组件渲染气泡。
           bubble: 'src/bubble.vue'
-          // 约定使用 notic组件渲染系统通知缩略信息
+          // 约定使用 notice组件渲染系统通知缩略信息
   		notice: 'src/notice.vue'
           // 约定暴露接口用于打开工作区以及工作区使用的组件
 
   	},
   	// 扩展 webpack 配置，通过 webpack-merge 合并到webpack中
   	configureWebpack: config => {
-  		// curstom webpack
+  		// custom webpack
   	},
-  	// 采用 webapck-chain 风格扩展 webapck配置
+  	// 采用 webpack-chain 风格扩展 webpack配置
   	chainWebpack: config => {
-  		// curstom webpack for webpack-chain
-  	}
+  		// custom webpack for webpack-chain
+  	},
+    // 模拟数据， 可以在消息开发调试阶段使用，构建生产包时不会被打包进去。
+    mockData: {
+        createTime: Data.now(),
+        title: '消息标题',
+        // 消息自定义消息数据内容，与 data.model.json模型声明的数据结构一致
+        data: {
+            name: '名称'
+        }
+    }
   }
   ```
 
@@ -329,7 +338,7 @@ Widget项目开发目录说明：
 
 ## Widget 开发 API
 
-在widiget 开发流程中，内置了一些常用的 属性， API，以及 工具库，帮助 widget 使用 智慧门店助手提供的能力，更好的完成 widget开发。
+在widget 开发流程中，内置了一些常用的 属性， API，以及 工具库，帮助 widget 使用 智慧门店助手提供的能力，更好的完成 widget开发。
 
 ### 组件内置 props
 
