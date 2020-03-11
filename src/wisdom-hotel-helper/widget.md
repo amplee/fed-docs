@@ -358,6 +358,7 @@ Widget项目开发目录说明：
   | endTime    | timestamp | 消息失效时间（表示消息为限时消息） |
   | cancelable | boolean   | 消息是否可忽略                     |
   | type       | string    | 消息类型（任务\[MSG_TASK\]、建议、通知\[MSG_NOTIFY\]等）     |
+  | temporary  | number    | 是否是临时消息。0：否，1：是           |
   | status     | string    | 消息状态                           |
   | userId     | string    | 消息目标用户                       |
   | innId      | string    | 消息目标门店                       |
