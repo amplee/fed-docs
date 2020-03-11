@@ -357,10 +357,10 @@ Widget项目开发目录说明：
   | startTime  | timestamp | 消息开始生效时间                   |
   | endTime    | timestamp | 消息失效时间（表示消息为限时消息） |
   | cancelable | boolean   | 消息是否可忽略                     |
-  | type       | string    | 消息类型（任务、建议、通知等）     |
+  | type       | string    | 消息类型（任务\[MSG_TASK\]、建议、通知\[MSG_NOTIFY\]等）     |
   | status     | string    | 消息状态                           |
-  | toUser     | string    | 消息目标用户                       |
-  | toInnId    | string    | 消息目标门店                       |
+  | userId     | string    | 消息目标用户                       |
+  | innId      | string    | 消息目标门店                       |
   | templateId | string    | 消息模板编号                       |
   | tenantId   | string    | 租户编号                           |
 
@@ -401,6 +401,8 @@ Widget项目开发目录说明：
 
 widget 内置了一系列 可用方法，以适配不同的widget开发。
 
+`widget-util` 已内置在工具中，无需 npm 安装，直接使用。
+
 __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
 
 * **isElectron()** <Badge text="Beta" />
@@ -410,6 +412,22 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
   import { isElectron } from 'widget-util';
   console.log(isElectron());
   ```
+
+* **axios**
+
+  工具内置 axios库，可直接使用
+  ``` js
+  import { axios } from 'widget-util';
+
+  axios.post('xxx/xx');
+  ```
+* **ElementUI**
+
+  内置 `element-ui` 库。可直接使用。 同时 组件已全局注册。
+  ``` js
+  import { ElementUI } from 'widget-util';
+  ```
+
 * **openWorkDialog(messageId, componentName)** <Badge text="alpha" type="warning" />
 
   打开工作区模态框
