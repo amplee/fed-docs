@@ -133,7 +133,16 @@ function getWisdomHotelHelper() {
             collapsable: false,
             children: [
                 '',
-                'widget'
+                {
+                    title: 'widget',
+                    collapsable: false,
+                    children: [
+                        'widget-standard',
+                        'wisdom-widget-cli',
+                        'widget-developer-auth',
+                        'widget-util'
+                    ]
+                }
             ]
         }
     ]
