@@ -95,14 +95,23 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
   import { ElementUI } from 'widget-util';
   ```
 
-* **openWorkDialog(messageId, componentName)** <Badge text="alpha" type="warning" />
+* **openWorkDialog({msgId, componentName,type})** <Badge text="alpha" type="warning" />
 
   打开工作区模态框
+
+  msgId 当前消息的消息Id
+
+  type 当前消息的消息类型，助手根据类型查询相应消息队列
+
   ``` js
   import { openWorkDialog } from 'widget-util';
-  openWorkDialog('0001', 'detail');
+  openWorkDialog({
+      msgId: '111',
+      componentName: 'detail',
+      type: 'MSG_TASK'
+  });
   ```
-* **openWorkWindow({ messageId, componentName, url })** <Badge text="alpha" type="warning" />
+* **openWorkWindow({ msgId, componentName, url, type })** <Badge text="alpha" type="warning" />
 
   打开工作区独立窗口。
 
@@ -110,17 +119,102 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
 
   传入componentName时， 加载 widget内置组件。 传入 url 时， 打开第三方网页。
 
+  type 当前消息的消息类型，助手根据类型查询相应消息队列
+
   ``` js
   import { openWorkWindow } from 'widget-util';
   openWorkWindow({
-      messageId: '111',
-      componentName: 'detail'
+      msgId: '111',
+      componentName: 'detail',
+      type: 'MSG_TASK'
   });
   openWorkWindow({
-      messageId: '111',
-      url: 'https://hyt.bestwehotel.com'
+      msgId: '111',
+      url: 'https://hyt.bestwehotel.com',
+      type: 'MSG_TASK'
   });
   ```
+
+* **getUser()** <Badge text="alpha" type="warning" />
+
+  获取用户信息
+
+  返回数据同统一平台登录返回字段
+
+  ``` js
+  import { getUser } from 'widget-util';
+  const user = getUser();
+  ```
+
+* **getCurrentInn()** <Badge text="alpha" type="warning" />
+
+  返回用户当前关联酒店
+
+  返回数据同统一平台登录返回的酒店列表酒店字段
+
+  ``` js
+  import { getCurrentInn } from 'widget-util';
+  const inn = getCurrentInn();
+  ```
+
+* **closeWorkDialog()** <Badge text="alpha" type="warning" />
+
+  关闭工作区
+
+  工作区业务完成后关闭工作区
+
+  ``` js
+  import { closeWorkDialog } from 'widget-util';
+  closeWorkDialog();
+  ```
+
+* **setMsgToHistory({ msgId, type })** <Badge text="alpha" type="warning" />
+
+  历史消息
+
+  业务完成或忽略消息
+
+  type 当前消息的消息类型，助手根据类型查询相应消息队列
+
+  ``` js
+  import { setMsgToHistory } from 'widget-util';
+  setMsgToHistory({ msgId, type });
+  ```
+
+* **closeBubble()** <Badge text="alpha" type="warning" />
+
+    关闭气泡
+
+    气泡任务忽略或处理，关闭气泡
+
+    ``` js
+    import { closeBubble } from 'widget-util';
+    closeBubble();
+    ```
+
+* **closeBubble()** <Badge text="alpha" type="warning" />
+
+    关闭气泡
+
+    气泡任务忽略，或处理，关闭气泡
+
+    ``` js
+    import { closeBubble } from 'widget-util';
+    closeBubble();
+    ```
+
+* **jumpTo({ type })** <Badge text="alpha" type="warning" />
+
+    跳转去任务列表/通知列表
+
+    场景示例： 气泡消息点击查看详情，跳转去对应列表
+
+    type tasks/notice
+
+    ``` js
+    import { closeBubble } from 'widget-util';
+    jumpTo({ type: 'tasks' });
+    ```
 
 * **其他**
 
