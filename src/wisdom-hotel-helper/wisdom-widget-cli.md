@@ -344,6 +344,11 @@ module.exports = {
 
 ## Change Log
 
+### v0.2.1
+
+- 新增 开发环境，预览模式下 message 数据内容查看
+- 新增跳转到 帮助文档入口
+
 ### v0.2.0
 
 - 优化 widget webpack Config class
