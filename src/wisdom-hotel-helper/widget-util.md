@@ -192,17 +192,6 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
     closeBubble();
     ```
 
-* **closeBubble()** <Badge text="alpha" type="warning" />
-
-    关闭气泡
-
-    气泡任务忽略，或处理，关闭气泡
-
-    ``` js
-    import { closeBubble } from 'widget-util';
-    closeBubble();
-    ```
-
 * **jumpTo({ type })** <Badge text="alpha" type="warning" />
 
     跳转去任务列表/通知列表

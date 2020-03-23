@@ -344,6 +344,11 @@ module.exports = {
 
 ## Change Log
 
+### v0.2.2
+
+- widget-util 新增支持 `closeWorkDialog`, `setMsgToHistory`, `closeBubble`, `jumpTo` API
+- widget-util 调整 `openWorkDialog`, `openWorkWindow` API入参
+
 ### v0.2.1
 
 - 新增 开发环境，预览模式下 message 数据内容查看
