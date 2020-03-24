@@ -344,6 +344,11 @@ module.exports = {
 
 ## Change Log
 
+### v0.2.3
+
+- 调整 工作区模态框样式
+- widget-util 新增 `getUser`,`getCurrentInn` API支持，目前返回写死的数据
+
 ### v0.2.2
 
 - widget-util 新增支持 `closeWorkDialog`, `setMsgToHistory`, `closeBubble`, `jumpTo` API
