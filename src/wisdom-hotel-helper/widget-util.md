@@ -192,6 +192,28 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
     closeBubble();
     ```
 
+* **closeSearchPage()** <Badge text="alpha" type="warning" />
+
+    关闭搜索页
+
+    业务完成后关闭搜索页
+
+    ``` js
+    import { closeSearchPage } from 'widget-util';
+    closeSearchPage();
+    ```
+
+* **writeClipboardText(text)** <Badge text="alpha" type="warning" />
+
+    写入文本至系统剪贴板,该方法仅接受字符串，最大长度同系统剪贴板最大长度限制
+
+    适用于一些文本拷贝场景
+
+    ``` js
+    import { writeClipboardText } from 'widget-util';
+    writeClipboardText(text);
+    ```
+
 * **jumpTo({ type })** <Badge text="alpha" type="warning" />
 
     跳转去任务列表/通知列表
@@ -203,6 +225,16 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
     ``` js
     import { closeBubble } from 'widget-util';
     jumpTo({ type: 'tasks' });
+    ```
+
+* **$toast(text)** <Badge text="alpha" type="warning" />
+
+    页面toast提示,duration单位为ms
+
+    全局vue插件，提供统一的toast方法
+
+    ``` js
+    this.$toast(text,duration);
     ```
 
 * **其他**
