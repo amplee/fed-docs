@@ -237,6 +237,14 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
     this.$toast(text,duration);
     ```
 
+* **全局指令 v-high-light** <Badge text="alpha" type="warning" />
+
+    全局vue指令，提供统一的高亮方法
+
+    ``` js
+    <div v-high-light='需要高亮的文本'>text</div>
+    ```
+
 * **其他**
 
   暂无其他方法，持续补充中。
