@@ -181,15 +181,15 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
   setMsgToHistory({ msgId, type });
   ```
 
-* **closeBubble()** <Badge text="alpha" type="warning" />
+* **closeBubble(msgId)** <Badge text="alpha" type="warning" />
 
     关闭气泡
 
-    气泡任务忽略或处理，关闭气泡
+    气泡任务忽略或处理，关闭气泡。因为bubble现在是队列，关闭时需传入msgId，表明关闭的气泡
 
     ``` js
     import { closeBubble } from 'widget-util';
-    closeBubble();
+    closeBubble(msgId);
     ```
 
 * **closeSearchPage()** <Badge text="alpha" type="warning" />
