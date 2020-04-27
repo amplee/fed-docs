@@ -101,14 +101,16 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
 
   msgId 当前消息的消息Id
 
-  type 当前消息的消息类型，助手根据类型查询相应消息队列
+  type 当前消息的消息类型，助手根据类型查询相应消息队列。
+  临时消息type为'MSG_TEMP',因为临时消息数据并不存入助手本地数据库，需传递msgData给助手
 
   ``` js
   import { openWorkDialog } from 'widget-util';
   openWorkDialog({
       msgId: '111',
       componentName: 'detail',
-      type: 'MSG_TASK'
+      type: 'MSG_TASK'，
+      data: MsgData(Object)
   });
   ```
 * **openWorkWindow({ msgId, componentName, url, type })** <Badge text="alpha" type="warning" />
