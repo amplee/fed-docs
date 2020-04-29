@@ -241,10 +241,28 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
 
 * **全局指令 v-high-light** <Badge text="alpha" type="warning" />
 
-    全局vue指令，提供统一的高亮方法
+    全局vue指令，提供统一的高亮方法。
+
+    高亮元素中与关键词相同的内容
 
     ``` js
-    <div v-high-light='需要高亮的文本'>text</div>
+    <div v-high-light>text</div>
+    ```
+
+* **全局loading $whhLoading(option)** <Badge text="alpha" type="warning" />
+
+    全局loading方法
+
+    option object {duration}
+
+    ``` js
+        // 不传递关闭时间，将返回loading实例，适用于异步请求的场景
+        const loading = this.$whhLoading()
+        await ajax
+        loading.close()
+
+        // 传递option,目前option仅有duration，单位为ms
+        this.$whhLoading({duration:3000})
     ```
 
 * **其他**
