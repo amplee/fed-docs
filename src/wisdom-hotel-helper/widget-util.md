@@ -192,7 +192,7 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
     closeBubble();
     ```
 
-* **jumpTo({ type })** <Badge text="alpha" type="warning" />
+* **jumpTo({ type })** <Badge text="Alpha" type="warning" />
 
     跳转去任务列表/通知列表
 
@@ -204,6 +204,35 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
     import { closeBubble } from 'widget-util';
     jumpTo({ type: 'tasks' });
     ```
+
+* **version** <Badge text="Beta" />
+
+  `type: Object`
+
+  获取智慧门店助手版本信息，并提供相对应的方法检测版本。
+
+  - **`version.get()`: currentVersion** 获取当前智慧门店助手版本。
+  - **`version.gt(version)`: currentVersion > version** 判断当前智慧门店助手版本是否大于传入的版本号。
+  - **`version.lt(version)`: currentVersion < version** 判断当前智慧门店助手版本是否小于传入的版本号。
+  - **`version.eq(version)`: currentVersion == version** 判断当前智慧门店助手版本是否等于传入的版本号。
+  - **`version.gte(version)`: currentVersion >= version** 判断当前智慧门店助手版本是否大于等于传入的版本号。
+  - **`version.lte(version)`: currentVersion <= version** 判断当前智慧门店助手版本是否小于等于传入的版本号。
+  - **`version.neq(version)`: currentVersion != version** 判断当前智慧门段助手版本号不等于传入的版本号。
+
+  示例：
+  ``` js
+  import { version } from 'widget-util'
+
+  // 获取当前智慧门店助手版本
+  const currentVersion = version.get() // 1.0.0
+
+  console.log(version.gt('1.2.0')) // false
+  console.log(version.lt('1.2.0')) // true
+  console.log(version.eq('1.0.0')) // true
+  console.log(version.gte('0.9.9')) // true
+  console.log(version.lte('1.2.0')) // true
+  console.log(version.neq('1.0.0')) // false
+  ```
 
 * **其他**
 
