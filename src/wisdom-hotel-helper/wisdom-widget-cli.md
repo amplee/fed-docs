@@ -134,7 +134,8 @@ module.exports = {
         listLength: 1,
         taskListLength: 1,
         noticeListLength: 1,
-        historyListLength: 1
+        historyListLength: 1,
+        keyword: '' // 配置关键词，模拟用户输入内容， v-high-light 指令将会通过该字段 处理高亮文本
     }
 
   	// 扩展 webpack 配置，通过 webpack-merge 合并到webpack中
@@ -343,6 +344,25 @@ module.exports = {
   "static": 指向widget的`static`目录
 
 ## Change Log
+
+### v0.2.9
+
+- widget-util 新增 `version`, `this.$toast()` `this.$whhLoading()` 等 API支持
+
+### v0.2.8
+略
+
+### v0.2.7
+略
+
+### v0.2.6
+略
+
+### v0.2.5
+略
+
+### v0.2.4
+略
 
 ### v0.2.3
 
