@@ -101,14 +101,16 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
 
   msgId 当前消息的消息Id
 
-  type 当前消息的消息类型，助手根据类型查询相应消息队列
+  type 当前消息的消息类型，助手根据类型查询相应消息队列。
+  临时消息type为'MSG_TEMP',因为临时消息数据并不存入助手本地数据库，需传递msgData给助手
 
   ``` js
   import { openWorkDialog } from 'widget-util';
   openWorkDialog({
       msgId: '111',
       componentName: 'detail',
-      type: 'MSG_TASK'
+      type: 'MSG_TASK'，
+      data: MsgData(Object)
   });
   ```
 * **openWorkWindow({ msgId, componentName, url, type })** <Badge text="alpha" type="warning" />
@@ -181,15 +183,37 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
   setMsgToHistory({ msgId, type });
   ```
 
-* **closeBubble()** <Badge text="alpha" type="warning" />
+* **closeBubble({msgId})** <Badge text="alpha" type="warning" />
 
     关闭气泡
 
-    气泡任务忽略或处理，关闭气泡
+    气泡任务忽略或处理，关闭气泡。接受一个对象。因为bubble现在是队列，关闭时需传入msgId，表明关闭的气泡
 
     ``` js
     import { closeBubble } from 'widget-util';
-    closeBubble();
+    closeBubble({msgId});
+    ```
+
+* **closeSearchPage()** <Badge text="alpha" type="warning" />
+
+    关闭搜索页
+
+    业务完成后关闭搜索页
+
+    ``` js
+    import { closeSearchPage } from 'widget-util';
+    closeSearchPage();
+    ```
+
+* **writeClipboardText(text)** <Badge text="alpha" type="warning" />
+
+    写入文本至系统剪贴板,该方法仅接受字符串，最大长度同系统剪贴板最大长度限制
+
+    适用于一些文本拷贝场景
+
+    ``` js
+    import { writeClipboardText } from 'widget-util';
+    writeClipboardText(text);
     ```
 
 * **jumpTo({ type })** <Badge text="Alpha" type="warning" />
@@ -233,6 +257,41 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
   console.log(version.lte('1.2.0')) // true
   console.log(version.neq('1.0.0')) // false
   ```
+* **$toast(text)** <Badge text="alpha" type="warning" />
+
+    页面toast提示,duration单位为ms
+
+    全局vue插件，提供统一的toast方法
+
+    ``` js
+    this.$toast(text,duration);
+    ```
+
+* **全局指令 v-high-light** <Badge text="alpha" type="warning" />
+
+    全局vue指令，提供统一的高亮方法。
+
+    高亮元素中与关键词相同的内容
+
+    ``` js
+    <div v-high-light>text</div>
+    ```
+
+* **全局loading $whhLoading(option)** <Badge text="alpha" type="warning" />
+
+    全局loading方法
+
+    option object {duration}
+
+    ``` js
+        // 不传递关闭时间，将返回loading实例，适用于异步请求的场景
+        const loading = this.$whhLoading()
+        await ajax
+        loading.close()
+
+        // 传递option,目前option仅有duration，单位为ms
+        this.$whhLoading({duration:3000})
+    ```
 
 * **其他**
 
