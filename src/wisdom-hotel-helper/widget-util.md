@@ -95,7 +95,7 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
   import { ElementUI } from 'widget-util';
   ```
 
-* **openWorkDialog({msgId, componentName,type})** <Badge text="alpha" type="warning" />
+* **openWorkDialog({msgId, componentName,type, title})** <Badge text="alpha" type="warning" />
 
   打开工作区模态框
 
@@ -110,6 +110,7 @@ __目前工具 版本不稳定，API随时发生重大变更，请谨慎使用__
       msgId: '111',
       componentName: 'detail',
       type: 'MSG_TASK'，
+      title: '工作区标题'
       data: MsgData(Object)
   });
   ```
