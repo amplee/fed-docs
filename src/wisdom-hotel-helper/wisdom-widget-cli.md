@@ -14,11 +14,14 @@ title: 开发工具
 npm i -g @bestwehotel/wisdom-widget-cli
 ```
 
+_如果安装过低于`v1.0.0`的版本，建议先卸载旧版本后再重新进行安装。_
+
+
 ## 使用
 
 工具安装完成后，生成全局命令行工具`wisdom-widget`，可以通过该命令行进行`Widget` 开发的流程。
 
-* **开发者登录** <Badge text="未开发功能" type="warning" />
+* **开发者登录** <Badge text="Beta" />
 
   ``` sh
   wisdom-widget login <developer-token>
@@ -67,11 +70,15 @@ npm i -g @bestwehotel/wisdom-widget-cli
   npm run publish
   # or
   wisdom-widget publish
+
+  # or
+  wisdom-widget publish --registry http://test.com
   ```
-  在助手一期中， 发布命令暂时只打包widget，生成压缩包到`.cache/[id]_[version].zip` 中，暂不支持直接上传到widget仓库。目前需要手动从 **`胥腾龙`** 处，分配获取一个 `widget ID`, 完成开发后，将压缩包发送给 **`胥腾龙`** 进行数据库表配置。
+  默认将会发布到测试环境门店小程序仓库。可以通过 `--registry` 指定服务器的域名
 
-  二期将会完善该功能。
+* **在智慧门店助手中启动开发者模式** <Badge text="Beta" />
 
+  如果你已经安装了本cli，且安装了最新版本的智慧门店助手， 启动智慧智慧门店助手后，可以在助手的系统托盘菜单中，查看到 开发者模式 的菜单按钮，点击后即可开启开发者模式。
 
 ## 项目目录说明
 
@@ -344,6 +351,12 @@ module.exports = {
   "static": 指向widget的`static`目录
 
 ## Change Log
+
+### v1.0.0
+- 全新的 wisdom-widget-cli 版本。
+- 开发者登录与开发权限验证。
+- 支持通过命令发布到门店小程序仓库。
+- 支持在智慧门店助手中启动开发者模式进行门店小程序调试。
 
 ### v0.2.9
 
