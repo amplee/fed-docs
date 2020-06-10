@@ -21,6 +21,10 @@ _如果安装过低于`v1.0.0`的版本，建议先卸载旧版本后再重新�
 
 工具安装完成后，生成全局命令行工具`wisdom-widget`，可以通过该命令行进行`Widget` 开发的流程。
 
+* **在智慧门店助手中启动开发者模式** <Badge text="Beta" />
+
+  如果你已经安装了本cli，且安装了最新版本的智慧门店助手， 启动智慧智慧门店助手后，可以在助手的系统托盘菜单中，查看到 开发者模式 的菜单按钮，点击后即可开启开发者模式。
+
 * **开发者登录** <Badge text="Beta" />
 
   ``` sh
@@ -76,9 +80,15 @@ _如果安装过低于`v1.0.0`的版本，建议先卸载旧版本后再重新�
   ```
   默认将会发布到测试环境门店小程序仓库。可以通过 `--registry` 指定服务器的域名
 
-* **在智慧门店助手中启动开发者模式** <Badge text="Beta" />
+* **切换源** <Badge text="1.0.3" type="success" />
 
-  如果你已经安装了本cli，且安装了最新版本的智慧门店助手， 启动智慧智慧门店助手后，可以在助手的系统托盘菜单中，查看到 开发者模式 的菜单按钮，点击后即可开启开发者模式。
+  开发者登录校验、门店小程序发布时，会请求该源地址。
+  ``` sh
+  # 切换到测试源
+  wisdom-widget config --registry test
+  # 切换到生产源  默认源
+  wisdom-widget config --registry production
+  ```
 
 ## 项目目录说明
 
@@ -351,6 +361,13 @@ module.exports = {
   "static": 指向widget的`static`目录
 
 ## Change Log
+
+### v1.0.3
+- 添加生产源， `wisdom-widget config --registry <registry>` 可通过`test|production` 切换测试与生产源地址.
+- 添加命令行参数： `wisdom-widget config --all` 查看当前的cli配置信息
+
+### v1.0.1
+- fix: 修复全局安装时，在写入`.rc` 文件时，获取不到权限，导致安装失败的问题，将`.rc`文件的创建流程迁移到其他命令初始化时创建。
 
 ### v1.0.0
 - 全新的 wisdom-widget-cli 版本。
