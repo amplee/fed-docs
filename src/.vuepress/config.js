@@ -113,11 +113,12 @@ function getStyleGuide() {
                     ]
                 },
                 {
-                    title: '构建支持',
+                    title: '工程化支持',
                     collapsable: true,
                     children: [
                         'build-eslint-webpack',
-                        'build-stylelint-webpack'
+                        'build-stylelint-webpack',
+                        'build-code-fix'
                     ]
                 },
                 {
