@@ -14,33 +14,64 @@ title: 指引
 
 ### Step 2. 如何做代码规范
 
-  在为你的项目或团队应用代码规范前，需要先了解下我们的代码规范的具体细则是如何的。
+在为你的项目或团队应用代码规范前，需要先了解下我们的代码规范的具体细则是如何的。
 
-  对于常规项目，我们有一份完善的标准的 代码风格指南： [standard 风格指南](/style-guide/eslint-standard.html)。<br />
-  对于库/框架等，我们有提供相关的指南和参考标准： [库/框架风格指南](/style-guide/lib-guide.html)。<br />
-  应用代码规范之前，你需要 __阅读并深入了解__ 相关的标准是具体内容以及细节。
+我们提供了不同技术选型下的标准的 代码风格指南：
 
-### Step 3. 工具化支持
+* **Javascript 代码风格指南**
+  - [standard 风格指南](/style-guide/js-guide-standard.html)。 适用于常规技术选型的项目。
+  - [Vue 项目风格指南](/style-guide/js-guide-vue.html)。  适用于技术选型为Vue的项目。
+  - [React 项目风格指南](/style-guide/js-guide-react.html)。 适用于技术选型为React的项目。
+  - [其他库/框架风格指南](/style-guide/js-guide-lib.html)。适用于其他框架作为技术选型的项目。
+
+* **CSS代码风格指南**
+  - [standard 风格指南](/style-guide/css-guide-standard.html)。 适用于 CSS/LESS 的样式风格检查。
+  - [SASS 风格指南](/style-guide/css-guide-scss.html)。 适用于 SASS 的样式风格检查。
+
+
+### Step 3. 开发环境支持
 
   如果仅仅依靠人力的方式，以及团队成员个人对规范的理解做代码规范，那么每个人所能遵循到的规范程度会有所不同，导致虽有规范但并没有彻底执行。
   所以我们需要引入相关的工具，自动化的监控，并给出提示以及警告，在开发过程当中，时刻提醒团队成员编写符合规范的代码。
 
   * **编辑器支持**
 
-    工欲善其事，必先利其器。首先需要完成的是对编辑器的配置：[编辑器配置](/style-guide/editor.html)。
+    工欲善其事，必先利其器。一个好的编辑器能够更好的帮助我们进行代码开发，在我们开发过程中，可以通过添加编辑器插件支持，从而帮助我们的开发时即时检查并修复不符合规范的代码内容。
+
+    - [EditorConfig](/style-guide/editor-plugin-config.html) 编辑器通用配置插件
+    - [Spell Checker](/style-guide/editor-plugin-spell-checker.html) 拼写检查插件
+    - [Eslint](/style-guide/editor-plugin-eslint.html) eslint插件
+    - [Stylelint](/style-guide/editor-plugin-stylelint.html) stylelint 插件
+
+ * **预设配置插件**
+
+    * **ESlint预设插件**
+      - [@bestwehotel/eslint-config-standard](/style-guide/eslint-config-standard.html) javascript 标准风格 eslint预设插件
+      - [@bestwehotel/eslint-config-vue](/style-guide/eslint-config-vue.html) Vue 风格 eslint预设插件
+      - [@bestwehotel/eslint-config-react](/style-guide/eslint-config-standard.html) React 风格 eslint预设插件
+
+    * **Stylelint预设插件**
+      - [@bestwehotel/stylelint-config-standard](/style-guide/stylelint-config-standard.html) Less/CSS 标准样式风格stylelint预设插件
+      - [@bestwehotel/stylelint-config-standard](/style-guide/stylelint-config-scss.html) SASS 标准样式风格stylelint预设插件
+
 
   * **项目工程化支持**
 
-    `ESLint` 可以帮助我们将代码规范集成到项目中，详细细节参考：[ESLint](/style-guide/ESLint.html)
+    - [webpack添加eslint](/style-guide/build-eslint-webpack.html)
+    - [webpack添加stylelint](/style-guide/build-stylelint-webpack.html)
 
   * **已有项目、已有代码如何应用代码规范**
 
-    `ESLint` 提供了相关的命令，可以帮助我们尽可能在修复代码文件不符合规范的内容，详细细节参考：[项目修复](/style-guide/ESLint.html#vue项目配置)<br />
+    `ESLint` 提供了相关的命令，可以帮助我们尽可能在修复代码文件不符合规范的内容，详细细节参考：[项目修复](/style-guide/build-code-fix.html)<br />
     但也因为工具的限制，没办法完全修复所有问题，所以剩余的不符合规范的内容，需要团队成员自行检查并修复。
 
   * **在代码提交前校验**
 
-    在你的代码提交前，需要通过代码规范的检查才可以提交并推送到远程仓库，这个是每个项目必须做的工作，具体方式参考：[Git Hook](/style-guide/git-hook.html)
+    在你的代码提交前，需要通过代码规范的检查才可以提交并推送到远程仓库，这个是每个项目必须做的工作，具体方式参考：[Git Hooks pre-commit](/style-guide/git-hooks-pre-commit.html)
+
+  * **提交信息校验**
+
+    为了规范化git提交信息， 需要在项目中补充 提交信息校验的 流程。具体接入方式参考：[Git Hooks commit-msg](/style-guide/git-hooks-verify-commit-msg.html)
 
 ### Step 4. 代码抽查
 
@@ -49,4 +80,4 @@ title: 指引
 
 ### Step 5. 完成
 
-  目前我们的 代码规范流程到此结束，如果你有更好的建议或者意见，欢迎随时讨论！
+  代码规范是随着团队的变化、项目的变化、技术选型的变化、在不断的实践中总结的最佳的代码编写风格规范，需要团队每个成员实践、总结、并提出更好的方案，逐步完善，以变得更加的适合团队，也更加有利于个人的技术发展。

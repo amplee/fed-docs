@@ -6,7 +6,7 @@ title: 提交信息校验
 
 在项目中添加 提交信息校验， 有助于帮助项目规范化 git commit 信息的提交内容规范。建议每个项目都应该添加此功能
 
-提交信息校验同样也是依赖于`husky` 库实现， 如果你的项目已经完成了 [提交前校验](/docs/style-guide/git-hooks-pre-commit.html) ，那么无需重新安装此库。
+提交信息校验同样也是依赖于`husky` 库实现， 如果你的项目已经完成了 [提交前校验](/style-guide/git-hooks-pre-commit.html) ，那么无需重新安装此库。
 
 在你执行 `git commit -m [msg]` 命令时， 会对 `msg` 进行格式校验。
 

@@ -14,7 +14,7 @@ Vue代码风格配置，适用于以下方式创建的Vue项目：
 
 为了便于在vue项目中使用， 开发了 `@bestwehotel/eslint-config-vue` 的eslint插件。
 
-该插件发布在 [私有npm仓库](/docs/npm/index.html) 中，可从私有npm仓库直接安装到项目中。
+该插件发布在 [私有npm仓库](/npm/index.html) 中，可从私有npm仓库直接安装到项目中。
 
 在项目根目录中新建`.eslintrc.js`：
 ``` js
