@@ -26,7 +26,7 @@ module.exports = {
             {text: '智慧门店助手', link: '/wisdom-hotel-helper/'}
         ],
         sidebar: {
-            '/style-guide/': getStyleGuide('代码规范', '代码审查'),
+            '/style-guide/': getStyleGuide(),
             '/npm/': getNpm('私有 NPM', 'NPM支持'),
             '/packages/': getPackages('仓库'),
             '/archer/': archerSidebar,
@@ -53,34 +53,85 @@ module.exports = {
 };
 
 
-function getStyleGuide(groupA, groupB) {
+function getStyleGuide() {
     return [
         {
-            title: groupA,
+            title: '代码规范',
             collapsable: false,
             children: [
                 '',
                 {
-                    title: '风格指南',
-                    collapsable: false,
+                    title: 'Javascript 风格指南',
+                    collapsable: true,
                     children: [
-                        'eslint-standard',
-                        'lib-guide',
+                        'js-guide-standard',
+                        'js-guide-vue',
+                        'js-guide-react',
+                        'js-guide-lib',
+                        'js-guide-other'
                     ]
                 },
                 {
-                    title: '工具支持',
-                    collapsable: false,
+                    title: 'CSS 风格指南',
+                    collapsable: true,
                     children: [
-                        'editor',
-                        'ESLint',
-                        'git-hook',
+                        'css-guide-standard',
+                        'css-guide-scss',
                     ]
                 }
             ]
         },
         {
-            title: groupB,
+            title: '项目集成',
+            collapsable: false,
+            children: [
+                {
+                    title: '编辑器插件',
+                    collapsable: true,
+                    children: [
+                        'editor-plugin-config',
+                        'editor-plugin-spell-checker',
+                        'editor-plugin-eslint',
+                        'editor-plugin-stylelint'
+                    ]
+                },
+                {
+                    title: 'Eslint配置',
+                    collapsable: true,
+                    children: [
+                        'eslint-config-standard',
+                        'eslint-config-vue',
+                        'eslint-config-react'
+                    ]
+                },
+                {
+                    title: 'Stylelint配置',
+                    collapsable: true,
+                    children: [
+                        'stylelint-config-standard',
+                        'stylelint-config-scss',
+                    ]
+                },
+                {
+                    title: '构建支持',
+                    collapsable: true,
+                    children: [
+                        'build-eslint-webpack',
+                        'build-stylelint-webpack'
+                    ]
+                },
+                {
+                    title: 'Git Hooks',
+                    collapsable: true,
+                    children: [
+                        'git-hooks-pre-commit',
+                        'git-hooks-verify-commit-msg'
+                    ]
+                }
+            ]
+        },
+        {
+            title: '代码审查',
             collapsable: false,
             children: [
                 'code-review-1',

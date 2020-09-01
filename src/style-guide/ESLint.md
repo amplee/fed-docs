@@ -8,7 +8,145 @@ title: ESLint 使用
 详细资料可前往官网了解：
 > [ESLint](https://cn.eslint.org/)
 
-## 在webpack中使用
+## 常规项目配置 —— 标准风格指南
+常规项目指的是
+- 包括但不限于通过 webpack、gulp搭建的前端项目
+- 包括但不限于 webPC应用、webMobile应用、小程序应用等
+- 包括但不限于 vue、react的前端项目
+
+都应该集成的eslint标准配置。
+
+### 标准风格指南的 eslint插件
+
+为了便于在项目中更方便的添加标准风格指南， 开发了`@bestwehotel/eslint-config-standard` 的eslint插件。
+
+该插件发布在 私有npm仓库中，可从私有npm仓库直接安装到项目中。
+
+可以在项目根目录中新建`.eslintrc.js`：
+``` js
+module.exports = {
+    extends: '@bestwehotel/eslint-config-standard'
+}
+```
+并安装以下依赖：
+- babel-eslint
+- eslint-config-standard
+- eslint-plugin-import
+- eslint-plugin-node
+- eslint-plugin-promise
+- eslint-plugin-standard
+- @bestwehotel/eslint-config-standard
+
+``` sh
+npm i -D eslint babel-eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard @bestwehotel/eslint-config-standard
+```
+
+
+_完整配置参考：_
+``` js
+module.exports = {
+    root: true,
+    env: {
+        node: true,
+        browser: true,
+    },
+    parserOptions: {
+        parser: 'babel-eslint',
+        ecmaVersion: 2018,
+        sourceType: 'module',
+    },
+    extends: [
+        'standard'
+    ],
+    rules: {
+        'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'indent': ['error', 4],
+        'space-before-function-paren': ["error", {
+            "anonymous": "always",
+            "named": "never",
+            "asyncArrow": "ignore"
+        }],
+        'eqeqeq': 'off',
+        'semi': ['error', 'always'],
+        'arrow-parens': 0,
+        'generator-star-spacing': 0,
+        'padded-blocks': 0, // 不允许块级开始或结束有空行
+        'comma-dangle': 0, // 要求或禁止使用拖尾逗号
+    }
+
+}
+
+```
+
+
+## 自建Vue项目配置
+
+
+
+### 规范配置：
+``` js
+module.exports = {
+    extends: [
+        'plugin:vue/essential',
+        '@vue/standard',
+        '@bestwehotel/eslint-config-standard'
+    ],
+    rules: {
+        'vue/script-indent': ['error', 4],
+        'vue/html-indent': ['error', 4],
+        'vue/no-v-html': 0,
+        'vue/name-property-casing': ['error', 'PascalCase'], // 默认 PascalCase
+        'vue/html-self-closing': ['error', {
+            'html': {
+                'void': 'never',
+                'normal': 'any',
+                'component': 'always'
+            }
+        }]
+    }
+}
+
+```
+其中 `@bestwehotel/eslint-config-standard` 是基于 [标准风格指南](/docs/style-guide/eslint-standard.html) 所建立的eslint插件。
+
+以上配置以单独抽离了一个新的eslint插件，用于简化配置流程
+``` js
+module.exports = {
+    extends: '@bestwehotel/eslint-config-vue'
+};
+```
+
+### 安装
+
+* **VUE-CLI项目中安装**
+
+  首先安装`@vue/cli-plugin-eslint`：
+  ``` sh
+  vue add eslint @bestwehotel/eslint-config-standard
+  ```
+  安装后运行如果报模块缺失的错误，通尝试通过安装以下模块包解决问题：
+  - eslint-config-standard
+  - eslint-plugin-import
+  - eslint-plugin-node
+  - eslint-plugin-promise
+  - eslint-plugin-standard
+  - @vue/eslint-config-standard
+  - @bestwehotel/eslint-config-vue
+  - @bestwehotel/eslint-config-standard
+  ``` sh
+  npm install -D eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard @vue/eslint-config-standard @bestwehotel/eslint-config-vue @bestwehotel/eslint-config-standard
+  ```
+
+如果项目是非基于 `vue-cli` 的，通过webpack自建的Vue项目
+
+## Vue-Cli项目配置
+## React项目配置
+## webpack中配置 eslint
+## gulp中配置 eslint
+## 项目修复
+
+### 在webpack中使用
 
 [eslint-loader](https://www.npmjs.com/package/eslint-loader) 模块可方便快速的让我们在基于 `webpack`的项目中使用 `ESLint`；
 
@@ -37,7 +175,7 @@ module.exports = {
 }
 ```
 
-## 在gulp中使用
+### 在gulp中使用
 
 在`gulp`中，使用 [gulp-eslint](https://www.npmjs.com/package/gulp-eslint)：
 
@@ -59,7 +197,7 @@ gulp.task('eslint', function () {
 });
 ```
 
-## 格式化输出信息
+### 格式化输出信息
 > [eslint-friendly-formatter](https://www.npmjs.com/package/eslint-friendly-formatter)
 
 `eslint-friendly-formatter` 是一个`eslint`检查格式化输出插件，将检查结果格式化输出到 终端以及浏览器的页面和控制台中，方便在开发阶段中即使查看到错误信息，并修复。
@@ -103,7 +241,7 @@ gulp.task('eslint', function () {
 
 ```
 
-## 常规项目配置
+### 常规项目配置
 
 `ESLint`提供了多重多样的配置文件的方式，可以使用`JavaScript`、`JSON`、`YAML` 等文件，为整个目录（处理整个主目录）和它的子目录指定配置文件。
 可以配置一个独立的`.eslintrc.*`文件，或者直接在`package.json`文件中的`eslintConfig`字段指定配置，ESLint会查找并自动读取它们。
@@ -159,7 +297,7 @@ module.exports = {
 }
 ```
 
-## Vue项目配置
+### Vue项目配置
 
 在基于 常规项目的配置下，需要安装 [eslint-plugin-vue](https://eslint.vuejs.org/)
 
@@ -210,7 +348,7 @@ module.exports = {
 }
 ```
 
-## 项目修复
+### 项目修复
 
 * **eslint --fix**
 
