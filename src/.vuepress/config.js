@@ -13,24 +13,24 @@ module.exports = {
     dest: 'docs',
     base: '/docs/',
     evergreen: false,
-    title: 'WeHotel 前端文档',
+    title: 'CBG 前端文档',
     // permalink: '/:slug',
     themeConfig: {
-        lastUpdated: '上次更新',
+        // lastUpdated: false,
         nav: [
             {text: '代码风格指南', link: '/style-guide/'},
-            {text: '私有npm', link: '/npm/'},
-            {text: '仓库', link: '/packages/'},
+            // {text: '私有npm', link: '/npm/'},
+            // {text: '仓库', link: '/packages/'},
             {text: '文章推荐', link: '/blog/'},
-            {text: '代码生成器', link: '/archer/'},
-            {text: '智慧门店助手', link: '/wisdom-hotel-helper/'}
+            // {text: '代码生成器', link: '/archer/'},
+            // {text: '智慧门店助手', link: '/wisdom-hotel-helper/'}
         ],
         sidebar: {
             '/style-guide/': getStyleGuide(),
-            '/npm/': getNpm('私有 NPM', 'NPM支持'),
-            '/packages/': getPackages('仓库'),
+            // '/npm/': getNpm('私有 NPM', 'NPM支持'),
+            // '/packages/': getPackages('仓库'),
             '/archer/': archerSidebar,
-            '/wisdom-hotel-helper/': getWisdomHotelHelper()
+            // '/wisdom-hotel-helper/': getWisdomHotelHelper()
         },
         displayAllHeaders: true,
         repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
