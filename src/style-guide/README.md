@@ -76,7 +76,7 @@ title: 指引
 ### Step 4. 代码抽查
 
   __CodeReview__ 环节会校验代码更多深层面的细节，此环节将会由人工评估完成。从多个维度对项目已提交的代码进行审核、评估、并给出意见和建议，得出评估结果。
-  请参考： [代码抽查](/style-guide/code-review.html)
+  请参考： [代码抽查](/style-guide/code-review-2.html)
 
 ### Step 5. 完成
 

@@ -33,8 +33,8 @@ module.exports = {
             // '/wisdom-hotel-helper/': getWisdomHotelHelper()
         },
         displayAllHeaders: true,
-        repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
-        repoLabel: '查看源码',
+        // repo: 'http://gzgit.bestwehotel.com/fe-gayhub/fe-docs',
+        // repoLabel: '查看源码',
     },
     plugins: [
         [
