@@ -24,7 +24,6 @@ module.exports = {
     extends: '@bestwehotel/stylelint-config-standard'
 };
 ```
-
 并安装以下依赖：
 - stylelint-config-standard
 

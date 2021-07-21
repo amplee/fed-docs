@@ -16,7 +16,7 @@ module.exports = {
     title: 'CBG 前端文档',
     // permalink: '/:slug',
     themeConfig: {
-        // lastUpdated: false,
+        lastUpdated: "最后更新",
         nav: [
             {text: '代码风格指南', link: '/style-guide/'},
             // {text: '私有npm', link: '/npm/'},
